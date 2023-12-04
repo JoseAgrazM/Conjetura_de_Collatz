@@ -4,6 +4,8 @@
     {
         static int numMax = 0;
         static int numPasos = 0;
+
+        static List<int> list = new List<int>();
         static void Main(string[] args)
         {
             int numero = Valor();
@@ -12,9 +14,14 @@
 
             Console.WriteLine($"Empezando en {numero} la sucesion tiene {numPasos} llegando hasta {numMax} antes de descender a 1");
 
+            IterarList(list);
+
+            Console.ReadKey();
         }
         static int Conjetura_Collatz(int n, ref int numMax, ref int numPasos)
         {
+            list.Add(n);
+
             if (n == 1)
             {
                 return n;
@@ -27,7 +34,7 @@
                 {
                     numMax = n;
                 }
-                return Conjetura_Collatz(n / 2, ref numMax, ref numPasos);
+                return Conjetura_Collatz(n / 2, ref numMax, ref numPasos) ;
             }
             else if (n % 2 == 1)
             {
@@ -59,6 +66,23 @@
                 }
             }
 
+        }
+
+        static void IterarList(List<int> list)
+        {
+            int numLinea = 0;
+            foreach (int n in list)
+            {
+                if (numLinea == 20)
+                {
+                    Console.WriteLine();
+                    numLinea = 0;
+                }
+                Console.Write(n + ", ");
+
+                numLinea++;
+
+            }
         }
 
 
